@@ -11,7 +11,7 @@ import com.wkrzywiec.crmspring.entity.Customer;
 import com.wkrzywiec.crmspring.utils.dao.CustomerDAO;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/customer")
 public class CustomerController {
 	
 	@Autowired
@@ -21,9 +21,8 @@ public class CustomerController {
 	public String customerList(Model model){
 		
 		List<Customer> listCustomer = customerDAO.getCustomers();
+		model.addAttribute("listCustomer", listCustomer);
 		
-		
-		System.out.println(listCustomer);
 		return "customer-list";
 	}
 }
