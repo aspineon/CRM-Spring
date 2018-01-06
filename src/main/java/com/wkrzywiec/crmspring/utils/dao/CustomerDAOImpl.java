@@ -28,8 +28,13 @@ public class CustomerDAOImpl implements CustomerDAO {
 	}
 	
 	@Override
+	public Customer getCustomer(int id) {
+		return getCurrentSession().get(Customer.class, id);
+	}
+	
+	@Override
 	public void saveCustomer(Customer customer) {
-		getCurrentSession().save(customer);
+		getCurrentSession().saveOrUpdate(customer);
 	}
 	
 	protected Session getCurrentSession(){

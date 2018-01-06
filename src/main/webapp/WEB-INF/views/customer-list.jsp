@@ -31,7 +31,7 @@
 					<th>Update</th>
 				</thead>
 				<c:forEach var="customer" items="${listCustomer}">
-					<c:url var="updateLink" value="customer/showFormForUpdate">
+					<c:url var="updateLink" value="/customer/showFormForUpdate">
 						<c:param name="customerId" value="${customer.id}" />
 					</c:url>
 				

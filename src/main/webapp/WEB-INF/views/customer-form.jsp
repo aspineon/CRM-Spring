@@ -21,6 +21,8 @@
 		
 		<div class="col-md-4">
 		<form:form action="saveCustomer" modelAttribute="customer" method="POST">
+			
+			<form:hidden path="id"/>
 			<table>
 				<tbody>
 					<tr>
