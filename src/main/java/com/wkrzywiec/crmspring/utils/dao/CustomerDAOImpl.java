@@ -18,18 +18,24 @@ public class CustomerDAOImpl implements CustomerDAO {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	@Transactional
 	public List<Customer> getCustomers() {
 		
-		Query<Customer> query = getCurrentSession().createQuery("from Customer", Customer.class);
+		Query<Customer> query = getCurrentSession().createQuery("from Customer order by lastName", Customer.class);
 		
 		List<Customer> list = query.getResultList();
 		
 		return list;
 	}
 	
+	@Override
+	public void saveCustomer(Customer customer) {
+		getCurrentSession().save(customer);
+	}
+	
 	protected Session getCurrentSession(){
 		return sessionFactory.getCurrentSession();
 	}
+
+
 
 }

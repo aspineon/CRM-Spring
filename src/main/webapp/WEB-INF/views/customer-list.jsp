@@ -18,17 +18,28 @@
 	</div>
 	<div id="container">
 		<div id="content">
+			<div class="col-md-2">
+			<button type="submit" class="btn btn-primary btn-block" 
+			onclick="window.location.href='showFormAdd'; return false;">Add Customer</button>
+			</div>
+			<br>
 			<table class="table table-striped" align="center">
 				<thead>
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email Address</th>
+					<th>Update</th>
 				</thead>
 				<c:forEach var="customer" items="${listCustomer}">
+					<c:url var="updateLink" value="customer/showFormForUpdate">
+						<c:param name="customerId" value="${customer.id}" />
+					</c:url>
+				
 					<tr>
 						<td> ${customer.firstName}</td>
 						<td> ${customer.lastName}</td>
 						<td> ${customer.email}</td>
+						<td> <a href="${updateLink}">Update</a></td>
 					</tr>
 				</c:forEach>
 			</table>
