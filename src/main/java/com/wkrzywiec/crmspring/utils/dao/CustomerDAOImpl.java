@@ -37,9 +37,6 @@ public class CustomerDAOImpl implements CustomerDAO {
 		getCurrentSession().saveOrUpdate(customer);
 	}
 	
-	protected Session getCurrentSession(){
-		return sessionFactory.getCurrentSession();
-	}
 
 	@Override
 	public void deleteCustomer(int id) {
@@ -50,6 +47,27 @@ public class CustomerDAOImpl implements CustomerDAO {
 		query.executeUpdate();
 	}
 
+	@Override
+	public List<Customer> searchCustomer(String searchName) {
+		
+		Query<Customer> query = null;
+		
+		if(searchName!=null && searchName.trim().length() > 0){
+			
+			query = getCurrentSession().createQuery("from Customer where lower(firstName) like :theName"
+					+ "	or lower(lastName) like :theName or lower(email) like :theName", Customer.class);
+			query.setParameter("theName", "%" + searchName.toLowerCase() +"%");
+			
+		} else {
+			query = getCurrentSession().createQuery("from Customer order by lastName", Customer.class);
+		}
+		
+		List<Customer> customerList = query.getResultList();
+		return customerList;
+	}
 
+	protected Session getCurrentSession(){
+		return sessionFactory.getCurrentSession();
+	}
 
 }
